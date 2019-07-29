@@ -16,7 +16,9 @@ File Plan
 	- controler.rb our controler in MVC architecture executing both our Gossip class and our views library
 	- gossip.rb is our ruby code to manipulate variable and arrays in ruby
 	- Views directory contain all our HTML file 
+
 2 config.ru is our routeur executing with shotgun -p4567
+
 3 in our Gemfile you will find our sinatra Gem
 
 Enjoy
