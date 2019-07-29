@@ -1,5 +1,6 @@
 require 'gossip'
 class ApplicationController < Sinatra::Base
+	
 	get '/' do #Le controller affiche notr index
   		erb :index, locals: {gossips: Gossip.all}
 	end
@@ -13,15 +14,21 @@ class ApplicationController < Sinatra::Base
   		redirect '/'
 	end
 
-	get '/gossips/:id/' do |id| #utilise une variable id pour trouver une instance de Gossip dans notre array -> voir méthode find de class Gossip
+	get '/gossips/find_gossip/' do #ouvre un formulaire. Tu peux choisir toi même ton gossip
 		puts "kirikou"
-  		erb :find_gossip, locals: {id: id, gossip: Gossip.find(id.to_i - 1)}
-
+  		erb :find_gossip
 	end
 
-	post '/gossips/id/' do #retourne dans le terminal l'id entrée ainsi que le potin
-		puts params['id']
+	post '/gossips/id/' do #grâce au formulaire tu peux choisir ton potin et l'afficher
+		puts params['id'].to_i
   		puts "Hello #{Gossip.find(params['id'].to_i).author} => #{Gossip.find(params['id'].to_i).content}"
+  		erb :show, locals: {id: params['id'], author: Gossip.find(params['id'].to_i).author, content: Gossip.find(params['id'].to_i).content}
+	end
+
+	get '/gossips/:id/' do #url dynamique permet de retourner le potin à l'adresse /gossips/:id où id est l'index de l'array all_gossips
+		puts params['id'].to_i
+  		puts "Hello #{Gossip.find(params['id'].to_i).author} => #{Gossip.find(params['id'].to_i).content}"
+  		erb :show, locals: {id: params['id'], author: Gossip.find(params['id'].to_i).author, content: Gossip.find(params['id'].to_i).content}
 	end
 
 end

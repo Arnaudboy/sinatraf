@@ -16,7 +16,7 @@ class Gossip
 	def self.all #affichage de l'ensemble de nos gossips dans l'index | un potin est instancié dans la class Gossip puis insérer dans un array. Cette array est affiché dans notre index.erb de notre directory views
 		all_gossips = []
 		CSV.read('./db/gossip.csv').each do |csv_line|
-			all_gossips << Gossip.new(csv_line[0], csv_line[1])
+			all_gossips << Gossip.new(csv_line[1], csv_line[0])
 		end
 		return all_gossips
 	end
@@ -24,7 +24,7 @@ class Gossip
 	def self.find(id) #une methode find semblable à all qui retourne un index du tableau all_gossips (tableau d'instances de Gossip). On cherche à afficher un potin en particulier.
 		all_gossips = []
 		CSV.read('./db/gossip.csv').each do |csv_line|
-			all_gossips << Gossip.new(csv_line[0], csv_line[1])
+			all_gossips << Gossip.new(csv_line[1], csv_line[0])
 		end
 		return all_gossips[id]
 	end
